@@ -16,14 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    parser_t.cpp \
-    calculator_t.cpp
+    calculator_t.cpp \
+    function_t.cpp
 
 DISTFILES += \
     input.in \
     kalkulator.conf
 
 HEADERS += \
-    parser_t.h \
     calculator_t.h \
-    global_values.h
+    global_values.h \
+    function_t.h

@@ -6,7 +6,6 @@
 #include <iostream>
 #include <cstdio>
 #include <QRegExp>
-#include "parser_t.h"
 #include "calculator_t.h"
 
 //QString
@@ -22,6 +21,7 @@ main(int argc, char *argv[])
 	QCoreApplication a(argc, argv);
 	QTextStream qStdIn(stdin);
 	calculator_t calc;
+	calc.add_fn("Muf", "test");
 
 	while (true) {
 		QString expr = qStdIn.readLine();
