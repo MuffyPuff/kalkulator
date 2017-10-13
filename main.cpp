@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdio>
 #include <QRegExp>
+
 #include "calculator_t.h"
 
 //QString

@@ -7,8 +7,9 @@
 #include <QTextStream>
 #include <iostream>
 #include <QString>
+#include <QList>
+#include <QRegExp>
 
-#include "parser_t.h"
 #include "function_t.h"
 
 class calculator_t : public QObject
@@ -25,8 +26,6 @@ signals:
 public slots:
 
 private:
-	parser_t parse;
-
 	QList<QRegExp> rx_list;
 	QMap<QString, function_t *> usr_fn;
 

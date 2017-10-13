@@ -1,4 +1,5 @@
 #include "calculator_t.h"
+#include <QDebug>
 
 calculator_t::calculator_t(QObject *parent) : QObject(parent)
 {
