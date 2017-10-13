@@ -4,18 +4,26 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
+// init
 calculator_t::calculator_t(QObject *parent) : QObject(parent)
 {
-	rx_list.append(QRegExp("([a-zA-Z][a-zA-Z0-9]*)"));
+	qDebug() << "init";
 	load_plugins();
+	rx_list.append(QRegExp("([a-zA-Z][a-zA-Z0-9]*)"));
+}
+
+calculator_t::~calculator_t()
+{
+	foreach (function_t *fn, usr_fn.values()) {
+		delete fn;
+	}
+	usr_fn.clear();
 }
 
 void
 calculator_t::load_plugins()
 {
-//	QFile func(QStandardPaths::standardLocations(
-//	                   QStandardPaths::AppDataLocation).first() +
-//	           "/plugins/" + pname + ".muf");
+	qDebug() << "Loading Plugins...";
 	QDir plugins_dir(QStandardPaths::standardLocations(
 	                         QStandardPaths::AppDataLocation).first() +
 	                 "/plugins/");
@@ -25,6 +33,9 @@ calculator_t::load_plugins()
 	}
 }
 
+/*
+ * for some reason this intermediate step makes it work. *shrugs*
+ */
 void
 calculator_t::add_plugin(QString pname)
 {
@@ -34,7 +45,6 @@ calculator_t::add_plugin(QString pname)
 	add_plugin(plugin_dir);
 
 }
-
 void
 calculator_t::add_plugin(QDir plugin)
 {
@@ -59,17 +69,22 @@ calculator_t::add_fn(QString pname, QString fname, QString body)
 }
 
 /*
- *
- *
- *
+ * Parse and calculate expression
  */
 QString
 calculator_t::operator()(const QString &expr)
 {
+	qDebug() << "Calculating...";
 	QScriptEngine expression;
 	return expression.evaluate(parse(expr)).toString();
 }
 
+
+/*
+ * Find all plugin functions and execute them.
+ * Then add the Math. prefix to all remaining functions.
+ * TODO: change above.
+ */
 QString
 calculator_t::parse(QString expr)
 {

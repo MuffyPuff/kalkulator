@@ -18,6 +18,7 @@ class calculator_t : public QObject
 	Q_OBJECT
 public:
 	explicit calculator_t(QObject *parent = nullptr);
+	~calculator_t();
 	void load_plugins();
 	void add_plugin(QString pname);
 	void add_plugin(QDir plugin);
