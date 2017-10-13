@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdio>
 #include <QRegExp>
+#include <QFile>
 
 #include "calculator_t.h"
 
@@ -20,17 +21,25 @@ int
 main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
-	QTextStream qStdIn(stdin);
+	QFile input("D:/Muf/Workspace/kalkulator/input.in");
+	input.open(QIODevice::ReadOnly);
+	QTextStream qStdIn(&input);
+	QTextStream is(stdin);
 	calculator_t calc;
-	calc.add_fn("Muf", "test");
 
 	while (true) {
+		if (qStdIn.atEnd()) {
+			qStdIn.setDevice(is.device());
+		}
+
+		// Read input
 		QString expr = qStdIn.readLine();
 
 //		if (expr == "postfix" || expr == "RPN") {
 //			continue;
 //		}
 
+		// Calculate and output
 		QTextStream qStdOut(stdout);
 		qStdOut << "--> " << calc(expr) << '\n';
 	}

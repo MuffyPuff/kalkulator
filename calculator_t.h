@@ -8,6 +8,7 @@
 #include <iostream>
 #include <QString>
 #include <QList>
+#include <QDir>
 #include <QRegExp>
 
 #include "function_t.h"
@@ -17,9 +18,12 @@ class calculator_t : public QObject
 	Q_OBJECT
 public:
 	explicit calculator_t(QObject *parent = nullptr);
+	void load_plugins();
+	void add_plugin(QString pname);
+	void add_plugin(QDir plugin);
+	void add_fn(QString pname, QString fname, QString body);
 	QString operator()(const QString &expr);
 	QString parse(QString expr);
-	void add_fn(QString pname, QString fname);
 
 signals:
 

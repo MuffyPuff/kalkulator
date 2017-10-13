@@ -20,8 +20,7 @@ SOURCES += main.cpp \
     function_t.cpp
 
 DISTFILES += \
-    input.in \
-    kalkulator.conf
+    input.in
 
 HEADERS += \
     calculator_t.h \
