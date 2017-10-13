@@ -58,7 +58,12 @@ calculator_t::add_plugin(QDir plugin)
 			QFile func(fn.absoluteFilePath());
 			func.open(QIODevice::ReadOnly);
 			QTextStream is(&func);
-			add_fn(plugin.dirName(), fn.baseName(), is.readAll());
+			QString body = "";
+			QString line;
+			while (is.readLineInto(&line)) {
+				body += line + "\n";
+			}
+			add_fn(plugin.dirName(), fn.baseName(), body);
 			func.close();
 		}
 	}
