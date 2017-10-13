@@ -4,11 +4,16 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
+QString usr_fn_regex = "";
+
 // init
 calculator_t::calculator_t(QObject *parent) : QObject(parent)
 {
 	qDebug() << "init";
 	load_plugins();
+	usr_fn_regex.chop(1);
+//	qDebug() << usr_fn_regex;
+	rx_list.append(QRegExp(usr_fn_regex));
 	rx_list.append(QRegExp("([a-zA-Z][a-zA-Z0-9]*)"));
 }
 
@@ -65,6 +70,7 @@ calculator_t::add_fn(QString pname, QString fname, QString body)
 {
 //	qDebug() << fname;
 //	qDebug() << body;
+	usr_fn_regex += fname + "|";
 	usr_fn.insert(fname, new function_t(pname, fname, body));
 }
 
@@ -92,6 +98,8 @@ calculator_t::parse(QString expr)
 	QList<int> positions;
 	qint8 pos = 0;
 
+// TODO: replace with one loop
+
 	foreach (QString key, usr_fn.keys()) {
 		QRegExp rx(key);
 //		qDebug() << key;
@@ -108,10 +116,14 @@ calculator_t::parse(QString expr)
 			pos += res.length();
 		}
 	}
-
-	pos = 0;
+//	qDebug() << expr;
 	foreach (QRegExp rx, rx_list) {
+		pos = 0;
+//		qDebug() << expr;
 		while ((pos = rx.indexIn(expr, pos)) != -1) {
+//			qDebug() << expr;
+//			qDebug() << rx;
+//			qDebug() << pos;
 			results << rx.cap(0);
 			positions << pos;
 
@@ -120,6 +132,7 @@ calculator_t::parse(QString expr)
 
 			pos += rx.matchedLength();
 		}
+//		qDebug() << expr;
 	}
 
 //	foreach (QString el, results) {
