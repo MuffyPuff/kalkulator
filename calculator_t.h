@@ -3,13 +3,12 @@
 
 #include <QObject>
 
-#include <QScriptEngine>
-#include <QTextStream>
 #include <iostream>
 #include <QString>
 #include <QList>
-#include <QDir>
+#include <QMap>
 #include <QRegExp>
+#include <functional>
 
 #include "function_t.h"
 

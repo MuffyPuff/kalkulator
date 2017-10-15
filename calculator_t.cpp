@@ -1,7 +1,9 @@
 #include "calculator_t.h"
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QStandardPaths>
+#include <QScriptEngine>
 #include <QTextStream>
 
 QString usr_fn_regex = "";
