@@ -8,6 +8,7 @@ class function_t
 public:
 	function_t(QString pname, QString fname, QString body);
 	QString operator()();
+	QString get_code();
 
 private:
 	QString function_name;

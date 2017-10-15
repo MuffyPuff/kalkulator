@@ -80,7 +80,7 @@ calculator_t::add_fn(QString pname, QString fname, QString body)
 }
 
 /*
- * Parse and calculate expression
+ * Parses and calculates expression
  */
 QString
 calculator_t::operator()(const QString &expr)
@@ -115,10 +115,10 @@ calculator_t::parse(QString expr)
 			QString fn = rx.cap(0);
 //			qDebug() << fn;
 			function_t *func = usr_fn[fn];
-			QString res = func->operator()();
+			QString src = func->get_code();
 //			qDebug() << res;
-			expr.replace(fn, this->operator()(res));
-			pos += res.length();
+			expr.replace(fn, src = this->operator()(src));
+			pos += src.length();
 		}
 	}
 //	qDebug() << expr;

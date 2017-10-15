@@ -8,8 +8,15 @@ function_t::function_t(QString pname, QString fname, QString body)
 	plugin_name = pname;
 }
 
+
+// TODO: execute code
 QString
 function_t::operator()()
+{
+	return function_body;
+}
+
+QString function_t::get_code()
 {
 	return function_body;
 }
