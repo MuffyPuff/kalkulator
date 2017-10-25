@@ -17,12 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     calculator_t.cpp \
-    function_t.cpp
+    function_t.cpp \
+    plugin_handler_t.cpp \
+    expression_t.cpp
 
 DISTFILES += \
-    input.in
+    input.txt
 
 HEADERS += \
     calculator_t.h \
     global_values.h \
-    function_t.h
+    function_t.h \
+    plugin_handler_t.h \
+    expression_t.h

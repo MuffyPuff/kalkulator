@@ -7,6 +7,20 @@
 
 QString usr_fn_regex = "";
 
+QString
+usr_fn_handle(QString expr, QString params)
+{
+	qDebug() << "Handling \"" + expr + "\" with \"" + params + "\".";
+	return expr;
+}
+
+QString
+math_fn_handle(QString expr, QString params)
+{
+	qDebug() << "Handling \"" + expr + "\" with \"" + params + "\".";
+	return expr;
+}
+
 // init
 calculator_t::calculator_t(QObject *parent) : QObject(parent)
 {
@@ -14,8 +28,10 @@ calculator_t::calculator_t(QObject *parent) : QObject(parent)
 	load_plugins();
 	usr_fn_regex.chop(1);
 //	qDebug() << usr_fn_regex;
-	rx_list.append(QRegExp(usr_fn_regex));
-	rx_list.append(QRegExp("([a-zA-Z][a-zA-Z0-9]*)"));
+	rx_list.append(QPair<QRegExp, std::function<QString(QString...)>>\
+	               (QRegExp(usr_fn_regex), usr_fn_handle));
+	rx_list.append(QPair<QRegExp, std::function<QString(QString...)>>\
+	               (QRegExp("([a-zA-Z][a-zA-Z0-9]*)"), math_fn_handle));
 }
 
 calculator_t::~calculator_t()
@@ -68,7 +84,6 @@ calculator_t::add_plugin(QDir plugin)
 			func.close();
 		}
 	}
-
 }
 
 void

@@ -7,11 +7,15 @@
 #include <QString>
 #include <QList>
 #include <QMap>
+#include <QPair>
 #include <QDir>
 #include <QRegExp>
 #include <functional>
+#include <QFunctionPointer>
 
 #include "function_t.h"
+
+#include "global_values.h"
 
 class calculator_t : public QObject
 {
@@ -31,7 +35,7 @@ signals:
 public slots:
 
 private:
-	QList<QRegExp> rx_list;
+	QList<QPair<QRegExp, std::function<QString(QString...)>>> rx_list;
 	QMap<QString, function_t *> usr_fn;
 
 };

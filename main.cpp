@@ -10,6 +10,8 @@
 
 #include "calculator_t.h"
 
+#include "global_values.h"
+
 //QString
 //calc(QString expr)
 //{
@@ -21,7 +23,7 @@ int
 main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
-	QFile input("D:/Muf/Workspace/kalkulator/input.in");
+	QFile input("D:/Muf/Workspace/kalkulator/input.txt");
 	input.open(QIODevice::ReadOnly);
 	QTextStream qStdIn(&input);
 	QTextStream is(stdin);
